@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true angovil/dockertest npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-1'
+  app: 'dockertest'
+  env: 'Dockertest-env'
+  bucket_name: 'elasticbeanstalk-eu-west-1-672077055338'
+  bucket_path: 'dockertest'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
